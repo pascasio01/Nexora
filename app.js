@@ -1,5 +1,8 @@
 
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+const MAX_TIME_HOURS = 72;
+const SCORE_DECIMALS = 2;
+const METRIC_DECIMALS = 1;
 
 function clamp(n, min, max) {
   return Math.max(min, Math.min(max, n));
@@ -28,7 +31,7 @@ function getTimeWithoutDoingHours(task) {
 }
 
 function getTimeScore(task) {
-  return clamp((getTimeWithoutDoingHours(task) / 72) * 10, 0, 10);
+  return clamp((getTimeWithoutDoingHours(task) / MAX_TIME_HOURS) * 10, 0, 10);
 }
 
 function score(task) {
@@ -44,9 +47,13 @@ function score(task) {
   };
 }
 
+function sanitizeTaskText(text) {
+  return text.replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
+}
+
 function addTask() {
   const input = document.getElementById("taskInput");
-  const text = input.value.trim();
+  const text = sanitizeTaskText(input.value);
   if (!text) return;
 
   tasks.push(
@@ -94,14 +101,14 @@ function buildReason(mainTask, secondTask) {
   const lead = secondTask
     ? ` Supera a la siguiente tarea por ${(
         mainTask.scoring.total - secondTask.scoring.total
-      ).toFixed(2)} puntos.`
+      ).toFixed(SCORE_DECIMALS)} puntos.`
     : "";
 
   return `Es la prioridad #1 porque tiene el mayor score total, con mayor peso actual en ${factors[0].key}.${lead}`;
 }
 
 function taskMeta(task) {
-  return `Score ${task.scoring.total.toFixed(2)}. Urgencia ${task.urgency.toFixed(1)}. Impacto ${task.impact.toFixed(1)}. Tiempo ${formatHours(task.timeWithoutDoingHours)}.`;
+  return `Score ${task.scoring.total.toFixed(SCORE_DECIMALS)}. Urgencia ${task.urgency.toFixed(METRIC_DECIMALS)}. Impacto ${task.impact.toFixed(METRIC_DECIMALS)}. Tiempo ${formatHours(task.timeWithoutDoingHours)}.`;
 }
 
 function render() {

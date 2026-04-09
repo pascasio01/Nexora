@@ -13,3 +13,12 @@ self.addEventListener("install", e => {
     })
   );
 });
+
+self.addEventListener("fetch", event => {
+  event.respondWith(
+    caches.match(event.request).then(cached => {
+      if (cached) return cached;
+      return fetch(event.request);
+    })
+  );
+});
