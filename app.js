@@ -53,8 +53,8 @@ function addTask() {
     normalizeTask({
       id: Date.now(),
       text,
-      urgency: Math.random() * 10,
-      impact: Math.random() * 10,
+      urgency: 5,
+      impact: 5,
       createdAt: Date.now(),
       done: false
     })
@@ -97,7 +97,7 @@ function buildReason(mainTask, secondTask) {
       ).toFixed(2)} puntos.`
     : "";
 
-  return `Es la prioridad #1 porque domina en ${factors[0].key} y mantiene el mayor score total.${lead}`;
+  return `Es la prioridad #1 porque tiene el mayor score total, con mayor peso actual en ${factors[0].key}.${lead}`;
 }
 
 function taskMeta(task) {
@@ -157,4 +157,3 @@ function done(id) {
 }
 
 render();
-
