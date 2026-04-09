@@ -48,7 +48,7 @@ function score(task) {
 }
 
 function sanitizeTaskText(text) {
-  return text.replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
+  return text.replace(/\s+/g, " ").trim();
 }
 
 function addTask() {
