@@ -119,15 +119,27 @@ function render() {
 
   const mainTask = ranked[0];
   const secondaries = ranked.slice(1, 3);
+  const mainCard = document.createElement("article");
+  mainCard.className = "card main-card";
 
-  mainEl.innerHTML = `
-    <article class="card main-card">
-      <h4 class="task-title">${mainTask.text}</h4>
-      <p class="main-reason">${buildReason(mainTask, secondaries[0])}</p>
-      <p class="meta">${taskMeta(mainTask)}</p>
-      <button onclick="done(${mainTask.id})">Marcar como hecha ✓</button>
-    </article>
-  `;
+  const mainTitle = document.createElement("h4");
+  mainTitle.className = "task-title";
+  mainTitle.textContent = mainTask.text;
+
+  const mainReason = document.createElement("p");
+  mainReason.className = "main-reason";
+  mainReason.textContent = buildReason(mainTask, secondaries[0]);
+
+  const mainMeta = document.createElement("p");
+  mainMeta.className = "meta";
+  mainMeta.textContent = taskMeta(mainTask);
+
+  const mainBtn = document.createElement("button");
+  mainBtn.textContent = "Marcar como hecha ✓";
+  mainBtn.addEventListener("click", () => done(mainTask.id));
+
+  mainCard.append(mainTitle, mainReason, mainMeta, mainBtn);
+  mainEl.appendChild(mainCard);
 
   if (!secondaries.length) {
     secondaryEl.innerHTML = `<div class="empty">No hay tareas secundarias por ahora.</div>`;
@@ -137,11 +149,20 @@ function render() {
   secondaries.forEach(task => {
     const card = document.createElement("article");
     card.className = "card secondary-card";
-    card.innerHTML = `
-      <h4 class="task-title">${task.text}</h4>
-      <p class="meta">${taskMeta(task)}</p>
-      <button onclick="done(${task.id})">Hecha ✓</button>
-    `;
+
+    const title = document.createElement("h4");
+    title.className = "task-title";
+    title.textContent = task.text;
+
+    const meta = document.createElement("p");
+    meta.className = "meta";
+    meta.textContent = taskMeta(task);
+
+    const btn = document.createElement("button");
+    btn.textContent = "Hecha ✓";
+    btn.addEventListener("click", () => done(task.id));
+
+    card.append(title, meta, btn);
     secondaryEl.appendChild(card);
   });
 }
