@@ -101,7 +101,7 @@ function buildReason(mainTask, secondTask) {
 }
 
 function taskMeta(task) {
-  return `Score ${task.scoring.total.toFixed(2)} · Urgencia ${task.urgency.toFixed(1)} · Impacto ${task.impact.toFixed(1)} · Tiempo ${formatHours(task.timeWithoutDoingHours)}`;
+  return `Score ${task.scoring.total.toFixed(2)}. Urgencia ${task.urgency.toFixed(1)}. Impacto ${task.impact.toFixed(1)}. Tiempo ${formatHours(task.timeWithoutDoingHours)}.`;
 }
 
 function render() {
@@ -177,4 +177,15 @@ function done(id) {
   render();
 }
 
+function setupEvents() {
+  const input = document.getElementById("taskInput");
+  const addBtn = document.getElementById("addBtn");
+
+  addBtn.addEventListener("click", addTask);
+  input.addEventListener("keydown", event => {
+    if (event.key === "Enter") addTask();
+  });
+}
+
+setupEvents();
 render();

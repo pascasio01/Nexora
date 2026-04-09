@@ -5,7 +5,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f0f0f">
   <title>NEXORA</title>
+  <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -17,7 +19,7 @@
 
     <section class="input-row">
       <input id="taskInput" placeholder="Nueva tarea..." />
-      <button onclick="addTask()">Agregar</button>
+      <button id="addBtn" type="button">Agregar</button>
     </section>
 
     <section class="board">
@@ -30,9 +32,13 @@
   </main>
 
   <script src="app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js"));
+    }
+  </script>
 </body>
 </html>
-
 
 
 
