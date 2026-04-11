@@ -1,0 +1,10 @@
+{
+  "name": "NEXORA",
+  "short_name": "NEXORA",
+  "description": "Sistema de ejecución y cierre de ciclos.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#cfff00",
+  "icons": []
+}
