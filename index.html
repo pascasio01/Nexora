@@ -1,0 +1,47 @@
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f0f0f">
+  <title>NEXORA</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="hero">
+      <h1>NEXORA</h1>
+      <p>El sistema decide automáticamente qué debes hacer ahora.</p>
+    </header>
+
+    <section class="input-row">
+      <input id="taskInput" placeholder="Nueva tarea..." aria-label="Descripción de la nueva tarea" />
+      <button id="addBtn" type="button" aria-label="Agregar nueva tarea">Agregar</button>
+    </section>
+
+    <section class="board">
+      <h2>Tarea principal</h2>
+      <div id="mainTask"></div>
+
+      <h3>Tareas secundarias</h3>
+      <div id="secondaryTasks"></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js"));
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+
+

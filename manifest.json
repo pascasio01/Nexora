@@ -1,0 +1,13 @@
+
+	
+{
+  "name": "NEXORA",
+  "short_name": "NEXORA",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0f0f0f",
+  "theme_color": "#cfff00",
+  "icons": []
+}
+
+
